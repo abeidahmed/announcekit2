@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include NameOfPerson
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   has_secure_password
