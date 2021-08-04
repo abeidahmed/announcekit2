@@ -60,10 +60,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Steup Node
+      - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 14.17.0
+          node-version: 14.17.4
           working-directory: next-flesh
 
       - name: Find yarn cache location
