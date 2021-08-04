@@ -1,11 +1,12 @@
 import Link from "next/link"
+import { SignupForm } from "../auth/components/SignupForm"
 import Slate from "../layouts/Slate"
 
 export default function Signup() {
   return (
     <Slate title="Sign up for a 14-day free trial">
       <div className="w-full bg-white shadow-lg rounded-md p-8 mt-4">
-        anything goes here
+        <SignupForm />
       </div>
 
       <p className="mt-8 text-center">
