@@ -12,6 +12,10 @@ module V1
       end
     end
 
+    def show
+      render json: Current.user, serializer: SessionSerializer
+    end
+
     private
 
     def session_params

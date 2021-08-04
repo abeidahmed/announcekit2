@@ -30,5 +30,13 @@ module V1
       assert_response :unprocessable_entity
       assert_equal %i[invalid], error_types
     end
+
+    def test_show_success
+      user = create(:user)
+      get v1_sessions_path, headers: json_header(user)
+
+      assert_response :ok
+      assert_equal %i[name email token], attribute_keys
+    end
   end
 end
