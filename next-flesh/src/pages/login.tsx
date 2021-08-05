@@ -1,10 +1,11 @@
 import Link from "next/link"
+import { ReactNode } from "react"
 import { LoginForm } from "../auth/components/LoginForm"
 import Slate from "../layouts/Slate"
 
-export default function Signup() {
+function Login() {
   return (
-    <Slate title="Login to your account">
+    <>
       <div className="w-full bg-white shadow-lg rounded-md p-8 mt-4">
         <LoginForm />
       </div>
@@ -15,6 +16,14 @@ export default function Signup() {
           <a className="text-indigo-600 hover:underline">Signup</a>
         </Link>
       </p>
-    </Slate>
+    </>
   )
 }
+
+Login.getLayout = (page: ReactNode) => (
+  <Slate title="Login to your account" pageTitle="Login">
+    {page}
+  </Slate>
+)
+
+export default Login

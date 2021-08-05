@@ -3,6 +3,7 @@
   "rules": {
     "semi": ["warn", "never"],
     "jsx-quotes": ["warn", "prefer-double"],
-    "quotes": ["warn", "double"]
+    "quotes": ["warn", "double"],
+    "react/display-name": ["disabled"]
   }
 }
