@@ -3,16 +3,18 @@ import { Form, FORM_ERROR } from "../../components/Form"
 import { loginValidation } from "../validations"
 import { LabeledTextField } from "../../components/LabeledTextField"
 import { loginMutation } from "../mutations/login"
+import { useCurrentUser } from "../../hooks/useCurrentUser"
 
 export const LoginForm = () => {
   const { mutateAsync } = useMutation(loginMutation)
+  const { setUser } = useCurrentUser()
 
   return (
     <Form
       onSubmit={async (values) => {
         try {
           const res = await mutateAsync(values)
-          console.log(res)
+          setUser(res)
         } catch (error) {
           return {
             [FORM_ERROR]: "Invalid email or password",

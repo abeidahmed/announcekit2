@@ -1,6 +1,7 @@
 import "../styles/index.scss"
 import type { AppProps } from "next/app"
 import { QueryClient, QueryClientProvider } from "react-query"
+import { CurrentUserProvider } from "../providers/currentUser"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,7 +14,9 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <CurrentUserProvider>
+        <Component {...pageProps} />
+      </CurrentUserProvider>
     </QueryClientProvider>
   )
 }

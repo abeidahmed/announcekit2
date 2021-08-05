@@ -1,19 +1,21 @@
 import { useMutation } from "react-query"
 import { Form } from "../../components/Form"
 import { LabeledTextField } from "../../components/LabeledTextField"
+import { useCurrentUser } from "../../hooks/useCurrentUser"
 import { serverError } from "../../utils/serverError"
 import { signupMutation } from "../mutations/signup"
 import { signupValidation } from "../validations"
 
 export const SignupForm = () => {
   const { mutateAsync } = useMutation(signupMutation)
+  const { setUser } = useCurrentUser()
 
   return (
     <Form
       onSubmit={async (values) => {
         try {
           const res = await mutateAsync(values)
-          console.log(res)
+          setUser(res)
         } catch (error) {
           return serverError(error.response.data.errors)
         }
