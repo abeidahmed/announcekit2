@@ -1,17 +1,28 @@
-import { Form } from "../../components/Form"
+import { useMutation } from "react-query"
+import { Form, FORM_ERROR } from "../../components/Form"
 import { loginValidation } from "../validations"
 import { LabeledTextField } from "../../components/LabeledTextField"
+import { loginMutation } from "../mutations/login"
 
 export const LoginForm = () => {
+  const { mutateAsync } = useMutation(loginMutation)
+
   return (
     <Form
-      onSubmit={(values) => {
-        console.log(values)
+      onSubmit={async (values) => {
+        try {
+          const res = await mutateAsync(values)
+          console.log(res)
+        } catch (error) {
+          return {
+            [FORM_ERROR]: "Invalid email or password",
+          }
+        }
       }}
       initialValues={{ email: "", password: "" }}
       schema={loginValidation}
     >
-      {({ handleSubmit, submitting }) => (
+      {({ handleSubmit, submitting, submitError }) => (
         <form onSubmit={handleSubmit} className="space-y-4">
           <LabeledTextField
             name="email"
@@ -26,6 +37,10 @@ export const LoginForm = () => {
             label="Password"
             required={true}
           />
+
+          {submitError && (
+            <p className="font-medium text-red-600">{submitError}</p>
+          )}
 
           <div>
             <button

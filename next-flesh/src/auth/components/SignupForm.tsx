@@ -1,12 +1,22 @@
+import { useMutation } from "react-query"
 import { Form } from "../../components/Form"
 import { LabeledTextField } from "../../components/LabeledTextField"
+import { serverError } from "../../utils/serverError"
+import { signupMutation } from "../mutations/signup"
 import { signupValidation } from "../validations"
 
 export const SignupForm = () => {
+  const { mutateAsync } = useMutation(signupMutation)
+
   return (
     <Form
-      onSubmit={(values) => {
-        console.log(values)
+      onSubmit={async (values) => {
+        try {
+          const res = await mutateAsync(values)
+          console.log(res)
+        } catch (error) {
+          return serverError(error.response.data.errors)
+        }
       }}
       schema={signupValidation}
       initialValues={{ name: "", email: "", password: "" }}
