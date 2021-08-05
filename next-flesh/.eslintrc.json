@@ -4,6 +4,6 @@
     "semi": ["warn", "never"],
     "jsx-quotes": ["warn", "prefer-double"],
     "quotes": ["warn", "double"],
-    "react/display-name": ["disabled"]
+    "react/display-name": ["off"]
   }
 }
