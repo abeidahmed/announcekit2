@@ -41,7 +41,7 @@ export const LabeledTextField: React.FC<LabeledTextFieldProps> = ({
         {...input}
         type={type}
         id={htmlFor || name}
-        className="block w-full rounded-md border-gray-300"
+        className="block w-full rounded-md border-gray-300 focus:ring-indigo-600 focus:border-indigo-600"
         disabled={submitting}
         {...props}
       />
