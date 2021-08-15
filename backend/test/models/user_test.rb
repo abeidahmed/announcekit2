@@ -34,6 +34,13 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  def test_normalize_email_before_validation
+    user = create(:user, email: "  JOHN@gmail.com  ")
+
+    assert user.valid?
+    assert_equal "john@gmail.com", user.email
+  end
+
   def test_presence_of_password
     user = build(:user, password: "")
 
