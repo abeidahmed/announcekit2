@@ -7,22 +7,22 @@ module Normalize
       normalizers = [block, options[:with]].flatten.compact
 
       before_validation do
-        args.each { |field| send("#{field}=", apply_normalizers(field, normalizers)) }
+        args.each { |field| send("#{field}=", normalized_value(field, normalizers)) }
       end
     end
   end
 
   private
 
-  def apply_normalizers(field, normalizers)
+  def normalized_value(field, normalizers)
     value = send(field).to_s
 
     normalizers.each do |normalizer|
-      if normalizer.respond_to?(:call)
-        value = normalizer.call(value)
-      elsif value.respond_to?(normalizer)
-        value = value.send(normalizer)
-      end
+      value = if normalizer.respond_to?(:call)
+                normalizer.call(value)
+              elsif value.respond_to?(normalizer)
+                value.send(normalizer)
+              end
     end
 
     value
